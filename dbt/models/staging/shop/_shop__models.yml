@@ -1,0 +1,86 @@
+models:
+  - name: stg_shop__customers
+    description: One row per customer (newest version), with cleaned names and e-mail.
+    columns:
+      - name: customer_id
+        data_tests: [unique, not_null]
+      - name: country_code
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('country_regions')
+                field: country_code
+
+  - name: stg_shop__products
+    description: One row per SKU.
+    columns:
+      - name: product_sku
+        data_tests: [unique, not_null]
+      - name: category_code
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('product_categories')
+                field: category_code
+
+  - name: stg_shop__orders
+    description: One row per order, with a clean status and order month.
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]
+      - name: customer_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_shop__customers')
+                field: customer_id
+      - name: order_status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["pending", "shipped", "completed", "cancelled", "returned"]
+      - name: currency
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["NOK", "SEK", "DKK", "EUR"]
+
+  - name: stg_shop__order_items
+    description: One row per order line, amounts in the order currency.
+    columns:
+      - name: order_item_id
+        data_tests: [unique, not_null]
+      - name: order_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('stg_shop__orders')
+                field: order_id
+      - name: product_sku
+        description: >
+          A few lines point at SKUs that were deleted from the product catalogue.
+          The test warns instead of failing so the pipeline still runs.
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('stg_shop__products')
+                field: product_sku
+              config:
+                severity: warn
+      - name: quantity
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+
+  - name: stg_shop__payments
+    description: One row per payment attempt or refund.
+    columns:
+      - name: payment_id
+        data_tests: [unique, not_null]
+      - name: payment_status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["success", "failed", "refunded"]

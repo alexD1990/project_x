@@ -1,0 +1,42 @@
+name: project_x
+version: "1.0.0"
+profile: project_x
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+analysis-paths: ["analyses"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - target
+  - dbt_packages
+
+models:
+  project_x:
+    staging:
+      +materialized: view
+      +schema: staging
+    intermediate:
+      +materialized: view
+      +schema: intermediate
+    marts:
+      +materialized: table
+      +schema: marts
+
+seeds:
+  project_x:
+    +schema: seeds
+    country_regions:
+      +column_types:
+        vat_rate: decimal(5,4)
+    currency_rates:
+      +column_types:
+        rate_month: date
+        rate_to_eur: decimal(12,6)
+    campaigns:
+      +column_types:
+        start_date: date
+        end_date: date
+        budget_eur: decimal(12,2)

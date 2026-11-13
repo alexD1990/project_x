@@ -1,0 +1,31 @@
+sources:
+  - name: shop
+    description: Raw tables from the Northpeak webshop, landed by the notebook analyze/generate_source_data.
+    database: workspace
+    schema: project_x_raw
+    tables:
+      - name: customers
+        description: One row per customer version. A customer can appear more than once; the newest updated_at wins.
+        columns:
+          - name: customer_id
+            data_tests: [not_null]
+      - name: products
+        description: Product catalogue (PIM export).
+        columns:
+          - name: product_sku
+            data_tests: [unique, not_null]
+      - name: orders
+        description: Webshop orders. Status values are not cleaned at the source.
+        columns:
+          - name: order_id
+            data_tests: [unique, not_null]
+      - name: order_items
+        description: Order lines. Prices are in the order currency.
+        columns:
+          - name: order_item_id
+            data_tests: [unique, not_null]
+      - name: payments
+        description: Payment attempts and refunds from the payment provider.
+        columns:
+          - name: payment_id
+            data_tests: [unique, not_null]

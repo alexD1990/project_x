@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "direction": "LR",
+  "positions": {
+    "int_order_items__enriched": {
+      "x": 900,
+      "y": 43
+    },
+    "int_orders__converted": {
+      "x": 600,
+      "y": 0
+    },
+    "int_payments__per_order": {
+      "x": 600,
+      "y": -86
+    },
+    "dim_customers": {
+      "x": 1500,
+      "y": 0
+    },
+    "dim_products": {
+      "x": 1200,
+      "y": 43
+    },
+    "fct_orders": {
+      "x": 1200,
+      "y": -43
+    },
+    "mart_monthly_revenue": {
+      "x": 1800,
+      "y": 0
+    },
+    "stg_shop__customers": {
+      "x": 300,
+      "y": -215
+    },
+    "stg_shop__order_items": {
+      "x": 300,
+      "y": 43
+    },
+    "stg_shop__orders": {
+      "x": 300,
+      "y": 129
+    },
+    "stg_shop__payments": {
+      "x": 300,
+      "y": -129
+    },
+    "stg_shop__products": {
+      "x": 300,
+      "y": 215
+    },
+    "campaigns": {
+      "x": 0,
+      "y": 215
+    },
+    "country_regions": {
+      "x": 900,
+      "y": -43
+    },
+    "currency_rates": {
+      "x": 300,
+      "y": -43
+    },
+    "product_categories": {
+      "x": 600,
+      "y": 86
+    },
+    "source:shop.customers": {
+      "x": 0,
+      "y": -215
+    },
+    "source:shop.order_items": {
+      "x": 0,
+      "y": -43
+    },
+    "source:shop.orders": {
+      "x": 0,
+      "y": 43
+    },
+    "source:shop.payments": {
+      "x": 0,
+      "y": -129
+    },
+    "source:shop.products": {
+      "x": 0,
+      "y": 129
+    }
+  },
+  "planned": {},
+  "plannedEdges": [],
+  "hidden": {}
+}

@@ -1,0 +1,23 @@
+models:
+  - name: int_orders__converted
+    description: Orders with the monthly EUR exchange rate and a revenue flag.
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]
+      - name: rate_to_eur
+        description: Missing if currency_rates has no row for the order's currency and month.
+        data_tests: [not_null]
+
+  - name: int_order_items__enriched
+    description: Order lines with product, category and amounts in EUR.
+    columns:
+      - name: order_item_id
+        data_tests: [unique, not_null]
+      - name: net_amount_eur
+        data_tests: [not_null]
+
+  - name: int_payments__per_order
+    description: Payments rolled up to one row per order.
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]

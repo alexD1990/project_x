@@ -1,0 +1,43 @@
+models:
+  - name: fct_orders
+    description: One row per order with amounts in order currency and EUR, payment state and sales region.
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]
+      - name: customer_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_id
+      - name: order_total_eur
+        data_tests: [not_null]
+      - name: net_revenue_eur
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+
+  - name: dim_customers
+    description: One row per customer with lifetime value and segment.
+    columns:
+      - name: customer_id
+        data_tests: [unique, not_null]
+      - name: customer_segment
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["prospect", "one_time", "returning", "loyal"]
+
+  - name: dim_products
+    description: One row per product with lifetime sales.
+    columns:
+      - name: product_sku
+        data_tests: [unique, not_null]
+
+  - name: mart_monthly_revenue
+    description: Revenue and margin per month, region and department. Feeds the monthly management report.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [order_month, region, department]

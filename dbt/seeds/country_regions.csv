@@ -1,0 +1,9 @@
+country_code,country_name,region,currency,vat_rate
+NO,Norway,Nordics,NOK,0.25
+SE,Sweden,Nordics,SEK,0.25
+DK,Denmark,Nordics,DKK,0.25
+FI,Finland,Nordics,EUR,0.255
+IS,Iceland,Nordics,ISK,0.24
+DE,Germany,DACH,EUR,0.19
+AT,Austria,DACH,EUR,0.20
+NL,Netherlands,Benelux,EUR,0.21
