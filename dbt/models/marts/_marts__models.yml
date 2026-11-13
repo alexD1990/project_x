@@ -41,3 +41,9 @@ models:
       - dbt_utils.unique_combination_of_columns:
           arguments:
             combination_of_columns: [order_month, region, department]
+
+  - name: mart_campaign_performance
+    description: One row per campaign with orders, revenue and margin against budget.
+    columns:
+      - name: campaign_code
+        data_tests: [unique, not_null]

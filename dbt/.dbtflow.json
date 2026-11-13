@@ -85,6 +85,10 @@
     "source:shop.products": {
       "x": 0,
       "y": 129
+    },
+    "mart_campaign_performance": {
+      "x": 1480,
+      "y": -200
     }
   },
   "planned": {},
